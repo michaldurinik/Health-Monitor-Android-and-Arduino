@@ -15,7 +15,7 @@ Initially we plan to mainly use this wearable board with heat sensors, GPS, hear
 
 Data gathered will include Location. Body temperature. Distance travelled over a period of time. Fluctuations in heart rate, We would like to look into capturing a respiratory rate also. Some readings to be displayed on an LCD display for instant readability of vital statistics, LCD display also can be programmed from the phone application as to what statistics are to be displayed or to alert the user to any impending serious situation or just display a daily mindful reminder.
 
-A limit for temperature, respiratory and heart rate will be set and an alert with location can be sent to a predefined number if any of these limits are reached. A very handy feature for someone who cares for an ill person.
+A limit for temperature, respiratory and heart rate will be set and an alert with location can be sent to a predefined number if any of these limits are reached. For example specific patterns from accelerometer can detect seizure attacks. A very handy feature for someone who cares for an ill person.
 
 An elegant touch interface on the Android application will present the data to the user in a variety of ways. Temperature can be presented in Celsius and Fahrenheit for example. Heart rate can be displayed numerically or visually as a flatline with sound or with a ripple type graphic effect. Different modules can be turned off and on. Limits can be changed and set based on ethnicity, sex, age and physical condition. Messages can be relayed to LCD display to alert user of optimum conditions for fat burning or cardio workouts derived from heart rate and body temperature sensors.
 
