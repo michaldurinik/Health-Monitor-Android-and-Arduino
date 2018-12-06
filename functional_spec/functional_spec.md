@@ -1,14 +1,28 @@
-st=>start: Start:>http://www.google.com[blank]
-e=>end:>http://www.google.com
-op1=>operation: My Operation
-sub1=>subroutine: My Subroutine
-cond=>condition: Yes
-or No?:>http://www.google.com
-io=>inputoutput: catch something...
-para=>parallel: parallel tasks
+## UML Diagrams
 
-st->op1->cond
-cond(yes)->io->e
-cond(no)->para
-para(path1, bottom)->sub1(right)->op1
-para(path2, top)->op1
+### Sequence Diagrams
+
+You can render sequence diagrams like this:
+
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+Note left of Alice: Alice responds
+Alice->Bob: Where have you been?
+```
+
+### Flow Charts
+
+Flow charts can be specified like this:
+```flow
+st=>start: Start
+e=>end: End
+op=>operation: My Operation
+op2=>operation: lalala
+cond=>condition: Yes or No?
+
+st->op->op2->cond
+cond(yes)->e
+cond(no)->op2
+```
