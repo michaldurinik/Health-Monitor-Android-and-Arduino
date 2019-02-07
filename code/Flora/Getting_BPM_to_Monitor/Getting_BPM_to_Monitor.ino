@@ -10,11 +10,11 @@
 --------------------------------------------------------------------*/
 
 #define USE_ARDUINO_INTERRUPTS true    // Set-up low-level interrupts for most acurate BPM math.
-#include <PulseSensorPlayground.h>     // Includes the PulseSensorPlayground Library.   
+#include <PulseSensorPlayground.h>     // Includes the PulseSensorPlayground Library.
 
 //  Variables
 const int PulseWire = 10;       // PulseSensor PURPLE WIRE connected to ANALOG PIN 0
-const int LED13 = 8;          // The on-board Arduino LED, close to PIN 13.
+const int LED13 = 7;          // The on-board Arduino LED, close to PIN 13.
 int Threshold = 550;           // Determine which Signal to "count as a beat" and which to ignore.
                                // Use the "Gettting Started Project" to fine-tune Threshold Value beyond default setting.
                                // Otherwise leave the default "550" value. 
@@ -29,7 +29,8 @@ void setup() {
   // Configure the PulseSensor object, by assigning our variables to it. 
   pulseSensor.analogInput(PulseWire);   
   pulseSensor.blinkOnPulse(LED13);       //auto-magically blink Arduino's LED with heartbeat.
-  pulseSensor.setThreshold(Threshold);   
+  pulseSensor.setThreshold(Threshold);
+  
 
   // Double-check the "pulseSensor" object was created and "began" seeing a signal. 
    if (pulseSensor.begin()) {

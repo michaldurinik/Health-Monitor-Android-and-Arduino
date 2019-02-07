@@ -1,0 +1,17 @@
+#to find out group of USB serial port like (adm, uucd, ...)
+ll /dev/ttyACM0 
+
+#add user to this group and these other groups
+gpasswd -a $USER adm
+gpasswd -a $USER uucp
+gpasswd -a $USER lock
+gpasswd -a $USER tty
+
+# might be needed to instal this java's rxtx if it give error during IDE launch
+pacman -S rxtx
+
+# making lock owner of lock group
+chown root:lock /run/lock
+
+#give permission to write in /run/lock to its owner (now every user in the group 'lock')
+chmod g+w /run/lock
