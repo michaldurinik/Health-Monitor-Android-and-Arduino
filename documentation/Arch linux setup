@@ -1,3 +1,6 @@
+#FILE > Preferences > Additional boards URL:
+https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+
 #to find out group of USB serial port like (adm, uucd, ...)
 ll /dev/ttyACM0 
 
