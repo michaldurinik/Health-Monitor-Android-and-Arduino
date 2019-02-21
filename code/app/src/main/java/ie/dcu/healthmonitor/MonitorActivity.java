@@ -1,0 +1,13 @@
+package ie.dcu.healthmonitor;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class MonitorActivity extends ChoiceActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_monitor);
+    }
+}
