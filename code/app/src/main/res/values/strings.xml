@@ -21,4 +21,6 @@
     <string name="w_hint">Enter weight in kilograms</string>
     <string name="bmi"></string>
     <string name="enter_btn">Submit</string>
+    <string name="welcome">Welcome</string>
+    <string name="perms_need">These permissions are needed for you to get the full benefit of this application</string>
 </resources>
