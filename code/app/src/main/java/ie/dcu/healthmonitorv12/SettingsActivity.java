@@ -11,9 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 class SettingsActivity extends ListActivity {
-
+	
     private ArrayAdapter<CharSequence> adapter;
-    private Intent intent;
     private Toast toast;
 
     @Override
@@ -30,21 +29,24 @@ class SettingsActivity extends ListActivity {
         String txt = (String) tv.getText();
         String clickText = "List Item " + txt + " was clicked!";
         toast = Toast.makeText(getBaseContext(), clickText, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
         if(txt.equals("Height m")|txt.equals("Weight kg")|txt.equals("BMI")){
-            toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
-            intent = new Intent(this, EditActivity.class);
+            Intent intent = new Intent(this, EditActivity.class);
             startActivity(intent);
         }else if(txt.equals("Emergency Contact No.")){
-            toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
         }else if(txt.equals("Avg. Heart Rate")){
-            toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
         }else if(txt.equals("Your Location")){
-            toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
         }
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+    }
+
 }
