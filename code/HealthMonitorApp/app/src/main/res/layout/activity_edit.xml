@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context=".EditActivity">
 
     <TextView
@@ -22,6 +23,10 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:gravity="center"
+        android:textColor="@color/colorText"
+        android:text=""
+        android:padding="10dp"
+        android:backgroundTint="@color/colorText"
         tools:layout_margin="5dp"/>
 
     <EditText
@@ -35,14 +40,20 @@
         android:padding="15dp"
         android:textSize="20sp"
         tools:autoText="false"
+        android:textColor="@color/colorText"
+        android:backgroundTint="@color/colorText"
         tools:layout_margin="5dp" />
 
     <TextView
         android:id="@+id/weight_text_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
         android:gravity="center"
+        android:textColor="@color/colorText"
+        android:textSize="24dp"
+        android:text=""
+        android:padding="10dp"
+        android:backgroundTint="@color/colorText"
         tools:layout_margin="5dp"/>
 
     <EditText
@@ -52,8 +63,10 @@
         android:gravity="center"
         android:hint="@string/w_hint"
         android:inputType="number"
-        android:padding="15dp"
-        android:textSize="20sp"
+        android:textColor="@color/colorText"
+        android:textSize="24dp"
+        android:padding="10dp"
+        android:backgroundTint="@color/colorText"
         tools:layout_margin="5dp" />
     <Button
         android:id="@+id/enter_btn"
@@ -63,6 +76,8 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/enter_btn"
+        android:textColor="@color/colorText"
+        android:background="@drawable/my_button"
         android:textSize="20sp"
         tools:layout_margin="5dp" />
 
@@ -72,6 +87,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:textColor="@color/colorText"
         android:text="@string/bmi"
         android:textAlignment="center"
         android:textSize="25sp"

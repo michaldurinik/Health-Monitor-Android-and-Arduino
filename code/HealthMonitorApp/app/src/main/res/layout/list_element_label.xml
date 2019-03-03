@@ -5,6 +5,9 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:textSize="20sp"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:textColor="@color/colorText"
+    android:text="123"
+    android:backgroundTint="@color/colorText">
 
 </TextView>
