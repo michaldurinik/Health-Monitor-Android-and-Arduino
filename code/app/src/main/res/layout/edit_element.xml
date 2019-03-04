@@ -16,14 +16,6 @@
         android:textSize="24sp"
         tools:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/height_text_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:gravity="center"
-        tools:layout_margin="5dp"/>
-
     <EditText
         android:id="@+id/height_text"
         android:layout_width="match_parent"
@@ -36,15 +28,6 @@
         android:textSize="20sp"
         tools:autoText="false"
         tools:layout_margin="5dp" />
-
-    <TextView
-        android:id="@+id/weight_text_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:gravity="center"
-        tools:layout_margin="5dp"/>
-
     <EditText
         android:id="@+id/weight_text"
         android:layout_width="match_parent"

@@ -20,12 +20,11 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends ListActivity implements  EasyPermissions.PermissionCallbacks {
 
     private ArrayAdapter<CharSequence> adapter;
+    private Intent intent;
     private String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION,
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                     Manifest.permission.BLUETOOTH,
-                                    Manifest.permission.BLUETOOTH_ADMIN,
                                     Manifest.permission.SEND_SMS,
                                     Manifest.permission.RECEIVE_BOOT_COMPLETED};
 
@@ -33,23 +32,18 @@ public class MainActivity extends ListActivity implements  EasyPermissions.Permi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_activity);
-        adapter = ArrayAdapter.createFromResource(this, R.array.menu_entries, R.layout.list_element_label);
-        setListAdapter(adapter);
         getPermissions();
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
 
     }
 
-    @AfterPermissionGranted(123456)
+    @AfterPermissionGranted(123)
     private void getPermissions(){
         if(EasyPermissions.hasPermissions(this, permissions)){
             Toast.makeText(this, R.string.welcome, Toast.LENGTH_SHORT);
+            adapter = ArrayAdapter.createFromResource(this, R.array.menu_entries, R.layout.list_element_label);
+            setListAdapter(adapter);
         }else{
-            EasyPermissions.requestPermissions(this, "These permissions are needed for you to get the full benefit of this application", 123456, permissions);
+            EasyPermissions.requestPermissions(this, "These permissions are needed for you to get the full benefit of this application", 123, permissions);
         }
     }
 
@@ -60,10 +54,10 @@ public class MainActivity extends ListActivity implements  EasyPermissions.Permi
         String clickText = "List Item " + tv.getText() + " was clicked!";
         Toast.makeText(getBaseContext(), clickText, Toast.LENGTH_SHORT).show();
         if(tv.getText().equals("Personalise Settings")){
-            Intent intent = new Intent(this, SettingsActivity.class);
+            intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }else{
-            Intent intent = new Intent(this, MonitorActivity.class);
+            intent = new Intent(this, MonitorActivity.class);
             startActivity(intent);
         }
     }
@@ -95,10 +89,4 @@ public class MainActivity extends ListActivity implements  EasyPermissions.Permi
 
         }
     }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-    }
-
 }
