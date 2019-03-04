@@ -18,3 +18,6 @@ chown root:lock /run/lock
 
 #give permission to write in /run/lock to its owner (now every user in the group 'lock')
 chmod g+w /run/lock
+
+# use this command before each start of Arduino IDE
+sudo systemctl stop ModemManager.service
