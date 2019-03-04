@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="app_name">Health Monitor</string>
+    <string name="main_menu">Health Monitor</string>
+    <string-array name="menu_entries">
+        <item>Personalise Settings</item>
+        <item>Monitor Your Progress</item>
+    </string-array>
+    <string name="settings_menu">Settings</string>
+    <string-array name="settings_entries">
+        <item>Height m</item>
+        <item>Weight kg</item>
+        <item>Emergency Contact No.</item>
+        <item>BMI</item>
+        <item>Avg. Heart Rate</item>
+        <item>Your Location</item>
+    </string-array>
+    <string name="monitor">Monitor</string>
+    <string name="hw">Height and Weight</string>
+    <string name="h_hint">Enter height in centimeters</string>
+    <string name="w_hint">Enter weight in kilograms</string>
+    <string name="bmi"></string>
+    <string name="enter_btn">Submit</string>
+    <string name="welcome">Welcome</string>
+    <string name="perms_need">These permissions are needed for you to get the full benefit of this application</string>
+</resources>

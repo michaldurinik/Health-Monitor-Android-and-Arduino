@@ -1,1 +1,0 @@
-## This is were we shall update our blog
