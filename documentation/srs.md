@@ -37,24 +37,24 @@ Start Android phone Health and wellbeing application
 User is presented with notifications giving permission choices, which are to accept or decline
 Grant application the permissions needed to give full experience of the app
 
-![alt text](images/Screenshot_20190305-101742.png "Permissions needed")
+![alt text](https://gitlab.computing.dcu.ie/durinim2/2019-ca326-mdurinik-healthmonitor/blob/master/documentation/images/Screenshot_20190305-101742.png "Permissions needed")
 
 Background activities include connection of bluetooth device, retrieving the global position of phone, 
 
 User is presented with the main screen with a list of two choices
-* Personal Settings and
-* Monitor Progress
+>Personal Settings and
+>Monitor Progress
 
-![alt text](images/Screenshot_20190305-101632.png "Entry screen")
+![alt text](https://gitlab.computing.dcu.ie/durinim2/2019-ca326-mdurinik-healthmonitor/blob/master/documentation/images/Screenshot_20190305-101632.png "Entry screen")
 
 User chooses the first choice Personal settings and is presented with a list of entry and display items including:
-* Height
-* Weight
-* Body mass index
-* Global position
-* Saved emergency number
+>Height
+>Weight
+>Body mass index
+>Global position
+>Saved emergency number
 
-![alt text](images/Screenshot_20190305-101641.png "Settings screen")
+![alt text](https://gitlab.computing.dcu.ie/durinim2/2019-ca326-mdurinik-healthmonitor/blob/master/documentation/images/Screenshot_20190305-101641.png "Settings screen")
 
 All the above will display previously obtained information if available if not the
 
