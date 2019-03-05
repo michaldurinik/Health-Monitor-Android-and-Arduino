@@ -42,17 +42,17 @@ Grant application the permissions needed to give full experience of the app
 Background activities include connection of bluetooth device, retrieving the global position of phone, 
 
 User is presented with the main screen with a list of two choices
->Personal Settings and
->Monitor Progress
+* Personal Settings and
+* Monitor Progress
 
 ![alt text](images/Screenshot_20190305-101632.png "Entry screen")
 
 User chooses the first choice Personal settings and is presented with a list of entry and display items including:
->Height
->Weight
->Body mass index
->Global position
->Saved emergency number
+* Height
+* Weight
+* Body mass index
+* Global position
+* Saved emergency number
 
 ![alt text](images/Screenshot_20190305-101641.png "Settings screen")
 
