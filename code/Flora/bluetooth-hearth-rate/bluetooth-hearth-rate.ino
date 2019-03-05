@@ -22,9 +22,44 @@
 #include "Adafruit_BLE.h"
 #include "Adafruit_BluefruitLE_SPI.h"
 #include "Adafruit_BluefruitLE_UART.h"
-
 #include "BluefruitConfig.h"
 
+
+//display
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
+
+// Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
+#define OLED_RESET     12 // Reset pin # (or -1 if sharing Arduino reset pin)
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+#define NUMFLAKES     10 // Number of snowflakes in the animation example
+
+#define LOGO_HEIGHT   16
+#define LOGO_WIDTH    16
+static const unsigned char PROGMEM logo_bmp[] =
+{ B00000000, B11000000,
+  B00000001, B11000000,
+  B00000001, B11000000,
+  B00000011, B11100000,
+  B11110011, B11100000,
+  B11111110, B11111000,
+  B01111110, B11111111,
+  B00110011, B10011111,
+  B00011111, B11111100,
+  B00001101, B01110000,
+  B00011011, B10100000,
+  B00111111, B11100000,
+  B00111111, B11110000,
+  B01111100, B11110000,
+  B01110000, B01110000,
+  B00000000, B00110000 };
+
+  
 /*
 #if SOFTWARE_SERIAL_AVAILABLE
   #include <SoftwareSerial.h>
@@ -95,6 +130,36 @@ void setup(void)
   boolean success;
 
   Serial.begin(115200);
+  ////////////////////////////////
+  //Display
+    // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3C for 128x32
+    Serial.println(F("SSD1306 allocation failed"));
+    for(;;); // Don't proceed, loop forever
+  }
+
+  // Show initial display buffer contents on the screen --
+  // the library initializes this with an Adafruit splash screen.
+  //display.display();
+  //delay(2000); // Pause for 2 seconds
+  display.clearDisplay();
+
+  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.println(F("Health"));
+  display.println(F("Monitor"));
+  display.display();      // Show initial text
+  delay(500);
+  display.startscrollright(0x00, 0x0F);
+  delay(4300);
+  display.stopscroll();
+
+  
+  
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //PulseSensor
+  
   Serial.println(F("Adafruit Bluefruit Heart Rate Monitor (HRM) Example"));
   Serial.println(F("---------------------------------------------------"));
 
@@ -111,7 +176,9 @@ void setup(void)
     Serial.println("We created a pulseSensor Object !");  //This prints one time at Arduino power-up,  or on Arduino reset.  
   }
 
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //BLUEFRUIT
+  
   /* Initialise the module */
   Serial.print(F("Initialising the Bluefruit LE module: "));
 
@@ -173,13 +240,16 @@ void setup(void)
   Serial.print(F("Adding Heart Rate Service UUID to the advertising payload: "));
   ble.sendCommandCheckOK( F("AT+GAPSETADVDATA=02-01-06-05-02-0d-18-0a-18") );
 
-//  /* Reset the device for the new service setting changes to take effect */
-//  Serial.print(F("Performing a SW reset (service changes require a reset): "));
-//  ble.reset();
-// Add a custom characteristic to the above service using a// custom 128-bit UUID
+  //  /* Reset the device for the new service setting changes to take effect */
+  //  Serial.print(F("Performing a SW reset (service changes require a reset): "));
+  //  ble.reset();
+  // Add a custom characteristic to the above service using a// custom 128-bit UUID
 
-//ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID128=8ce255c0-200a-11e0-ac64-0800200c9a66,PROPERTIES=0x02,MIN_LEN=1,VALUE=100"), &uuid);
-ble.reset();
+  ble.sendCommandWithIntReply( F("AT+BLEGETADDR"), &uuid ); //get device address 48bit: "D4:57:7B:EA:6C:D7"
+  //AT+GATTADDSERVICE=UUID128=00001101-0000-1000-8000-00805f9b34fb; 
+
+  //ble.sendCommandWithIntReply(F("AT+GATTADDCHAR=UUID128=8ce255c0-200a-11e0-ac64-0800200c9a66,PROPERTIES=0x02,MIN_LEN=1,VALUE=100"), &uuid);
+  ble.reset();
 
   Serial.println();
 }
@@ -195,12 +265,15 @@ void loop(void)
  Serial.println("♥  A HeartBeat Happened ! "); // If test is "true", print a message "a heartbeat happened".
  Serial.print("BPM: ");                        // Print phrase "BPM: " 
  Serial.println(heart_rate);                        // Print the value inside of myBPM. 
- //ble.print( F("AT+GATTCHAR=") );
+// ble.print( F("AT+GATTCHAR=") );
+// ble.print( hrmMeasureCharId );
+// ble.print( F(",00-") );
  ble.print("AT+BLEUARTTX="); //responsible for sending to phone over UART
- //ble.print( hrmMeasureCharId );
- //ble.print( F(",00-") );
  ble.print(heart_rate);
  ble.println(F(" BPM  "));
+
+
+ 
  delay (1000); //give time for phone to give response back
 
   /* Check if command executed OK */
@@ -208,6 +281,14 @@ void loop(void)
   {
     Serial.println(F("Failed to get response!"));
   }
+    display.clearDisplay();
+
+  display.setTextSize(3);             // Normal 1:1 pixel scale
+  display.setTextColor(WHITE);        // Draw white text
+  display.setCursor(0,0);             // Start at top-left corner
+  display.print(heart_rate);
+  display.println(F(" BPM  "));
+  display.display();
   
 }
 delay(20);
