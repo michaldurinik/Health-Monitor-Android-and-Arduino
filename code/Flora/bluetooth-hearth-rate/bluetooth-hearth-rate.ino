@@ -18,7 +18,7 @@
 */
 
 #include <Arduino.h>
-#include <SPI.h>
+//#include <SPI.h>
 #include "Adafruit_BLE.h"
 #include "Adafruit_BluefruitLE_SPI.h"
 #include "Adafruit_BluefruitLE_UART.h"
@@ -37,27 +37,27 @@
 #define OLED_RESET     12 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-#define NUMFLAKES     10 // Number of snowflakes in the animation example
+//#define NUMFLAKES     10 // Number of snowflakes in the animation example
 
-#define LOGO_HEIGHT   16
-#define LOGO_WIDTH    16
-static const unsigned char PROGMEM logo_bmp[] =
-{ B00000000, B11000000,
-  B00000001, B11000000,
-  B00000001, B11000000,
-  B00000011, B11100000,
-  B11110011, B11100000,
-  B11111110, B11111000,
-  B01111110, B11111111,
-  B00110011, B10011111,
-  B00011111, B11111100,
-  B00001101, B01110000,
-  B00011011, B10100000,
-  B00111111, B11100000,
-  B00111111, B11110000,
-  B01111100, B11110000,
-  B01110000, B01110000,
-  B00000000, B00110000 };
+//#define LOGO_HEIGHT   16
+//#define LOGO_WIDTH    16
+//static const unsigned char PROGMEM logo_bmp[] =
+//{ B00000000, B11000000,
+//  B00000001, B11000000,
+//  B00000001, B11000000,
+//  B00000011, B11100000,
+//  B11110011, B11100000,
+//  B11111110, B11111000,
+//  B01111110, B11111111,
+//  B00110011, B10011111,
+//  B00011111, B11111100,
+//  B00001101, B01110000,
+//  B00011011, B10100000,
+//  B00111111, B11100000,
+//  B00111111, B11110000,
+//  B01111100, B11110000,
+//  B01110000, B01110000,
+//  B00000000, B00110000 };
 
   
 /*
@@ -79,7 +79,30 @@ const int PulseWire = 10;       // PulseSensor PURPLE WIRE connected to ANALOG P
 const int LED13 = 7;          // The on-board Arduino LED, close to PIN 13.
 int Threshold = 550;           // Determine which Signal to "count as a beat" and which to ignore.
                                // Use the "Gettting Started Project" to fine-tune Threshold Value beyond default setting.
-                               // Otherwise leave the default "550" value. 
+                               // Otherwise leave the default "550" value.
+
+//TMP36 Pin Variables
+//int sensorPin = 9; //the analog pin the TMP36's Vout (sense) pin is connected to
+                        //the resolution is 10 mV / degree centigrade with a
+                        //500 mV offset to allow for negative temperature
+
+
+#include <OneWire.h> 
+#include <DallasTemperature.h>
+/********************************************************************/
+// Data wire is plugged into pin 2 on the Arduino 
+#define ONE_WIRE_BUS 9 
+/********************************************************************/
+// Setup a oneWire instance to communicate with any OneWire devices  
+// (not just Maxim/Dallas temperature ICs) 
+OneWire oneWire(ONE_WIRE_BUS); 
+/********************************************************************/
+// Pass our oneWire reference to Dallas Temperature. 
+DallasTemperature sensors(&oneWire);
+/********************************************************************/ 
+
+
+
                                
 PulseSensorPlayground pulseSensor;  // Creates an instance of the PulseSensorPlayground object called "pulseSensor"
 
@@ -124,9 +147,11 @@ int32_t uuid;
 /**************************************************************************/
 void setup(void)
 {
+
+  
 //  while (!Serial); // required for Flora & Micro
 //  delay(500);
-
+  sensors.begin(); //dallas temperature sensors
   boolean success;
 
   Serial.begin(115200);
@@ -144,16 +169,16 @@ void setup(void)
   //delay(2000); // Pause for 2 seconds
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
-  display.setTextColor(WHITE);
-  display.setCursor(0, 0);
-  display.println(F("Health"));
-  display.println(F("Monitor"));
-  display.display();      // Show initial text
-  delay(500);
-  display.startscrollright(0x00, 0x0F);
-  delay(4300);
-  display.stopscroll();
+//  display.setTextSize(2); // Draw 2X-scale text
+//  display.setTextColor(WHITE);
+//  display.setCursor(0, 0);
+//  display.println(F("Health"));
+//  display.println(F("Monitor"));
+//  display.display();      // Show initial text
+//  delay(500);
+//  display.startscrollright(0x00, 0x0F);
+//  delay(4300);
+//  display.stopscroll();
 
   
   
@@ -163,7 +188,7 @@ void setup(void)
   Serial.println(F("Adafruit Bluefruit Heart Rate Monitor (HRM) Example"));
   Serial.println(F("---------------------------------------------------"));
 
-  randomSeed(micros());
+  //randomSeed(micros());
 
   // Configure the PulseSensor object, by assigning our variables to it. 
   pulseSensor.analogInput(PulseWire);   
@@ -257,9 +282,30 @@ void setup(void)
 /** Send randomized heart rate data continuously **/
 void loop(void)
 {
+
+// int reading = analogRead(sensorPin); 
+//
+// Serial.print(reading); Serial.println(" reading");
+// 
+// // converting that reading to voltage, for 3.3v arduino use 3.3
+// float voltage = reading * 3.3;
+// voltage /= 1024.0; 
+// 
+// // print out the voltage
+// Serial.print(voltage); Serial.println(" volts");
+// 
+// // now print out the temperature
+// float temperatureC = voltage * 100 ;  //converting from 10 mv per degree wit 500 mV offset
+//                                               //to degrees ((voltage - 500mV) times 100)
+// Serial.print(temperatureC); Serial.println(" degrees C");
+// 
+// // now convert to Fahrenheit
+// float temperatureF = (temperatureC * 9.0 / 5.0) + 32.0;
+// Serial.print(temperatureF); Serial.println(" degrees F");
+//  delay(20);
+  
   int heart_rate = pulseSensor.getBeatsPerMinute();  // Calls function on our pulseSensor object that returns BPM as an "int".
                                                // "myBPM" hold this BPM value now.
-
   
  if (pulseSensor.sawStartOfBeat()) {            // Constantly test to see if "a beat happened". 
  Serial.println("♥  A HeartBeat Happened ! "); // If test is "true", print a message "a heartbeat happened".
@@ -273,6 +319,25 @@ void loop(void)
  ble.println(F(" BPM  "));
 
 
+
+ // call sensors.requestTemperatures() to issue a global temperature 
+ // request to all devices on the bus 
+/********************************************************************/
+ //Serial.print(" Requesting temperatures..."); 
+ sensors.requestTemperatures(); // Send the command to get temperature readings 
+ Serial.println("DONE"); 
+/********************************************************************/
+ Serial.print("Temperature is: "); 
+ float temp = sensors.getTempCByIndex(0);
+ Serial.print(temp);
+ //Serial.print(sensors.getTempCByIndex(0)); // Why "byIndex"?  
+   // You can have more than one DS18B20 on the same bus.  
+   // 0 refers to the first IC on the wire 
+   //delay(1000); 
+
+
+   
+
  
  delay (1000); //give time for phone to give response back
 
@@ -283,13 +348,21 @@ void loop(void)
   }
     display.clearDisplay();
 
-  display.setTextSize(3);             // Normal 1:1 pixel scale
+  display.setTextSize(2);             // Normal 1:1 pixel scale
   display.setTextColor(WHITE);        // Draw white text
   display.setCursor(0,0);             // Start at top-left corner
   display.print(heart_rate);
   display.println(F(" BPM  "));
   display.display();
-  
+
+
+  display.setTextSize(1);             // Normal 1:1 pixel scale
+  display.setTextColor(WHITE);        // Draw white text
+  display.setCursor(85,0);             // Start at top-left corner
+  //display.print(temperatureC);
+  display.print(temp);
+  display.println(F(" C"));
+  display.display();
 }
 delay(20);
   
