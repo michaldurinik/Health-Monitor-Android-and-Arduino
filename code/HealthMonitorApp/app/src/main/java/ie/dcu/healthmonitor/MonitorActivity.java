@@ -14,24 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Set;
 import java.util.UUID;
 
 public class MonitorActivity extends AppCompatActivity {
@@ -155,8 +146,18 @@ public class MonitorActivity extends AppCompatActivity {
         mHeartRate.setText("---");
     }
 
-    private Runnable mStopRunnable = () -> { stopScan(); };
-    private Runnable mStartRunnable = () -> { startScan(); };
+    private Runnable mStopRunnable = new Runnable() {
+        @Override
+        public void run() {
+            stopScan();
+        }
+    };
+    private Runnable mStartRunnable = new Runnable() {
+        @Override
+        public void run() {
+            startScan();
+        }
+    };
 
     private void startScan(){
         mBluetoothAdapter.startLeScan(this);
@@ -228,11 +229,11 @@ public class MonitorActivity extends AppCompatActivity {
             switch (mState) {
                 case 0:
                     Log.d(TAG, "Reading temperature");
-                    characteristic = gatt.getService(TEMPERATURE_SERVICE).getCharacteristic(TEMPERATURE_DATA_CHAR);
+                    characteristic = gatt.getService(TEMPERATURE).getCharacteristic(TEMPERATURE_MEASUREMENT);
                     break;
                 case 1:
                     Log.d(TAG, "Reading Heart rate");
-                    characteristic = gatt.getService(HEART_RATE_MEASUREMENT_SERVICE).getCharacteristic(HEART_RATE_MEASUREMENT);
+                    characteristic = gatt.getService(HEART_RATE_MEASUREMENT).getCharacteristic(HEART_RATE_CONTROL_POINT);
                     break;
                 default:
                     return;
@@ -297,9 +298,9 @@ public class MonitorActivity extends AppCompatActivity {
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             // For each read pass data to ui thread
-            if (TEMPERATURE_DATA_CHAR.equals(characteristic.getUuid()))
+            if (TEMPERATURE.equals(characteristic.getUuid()))
                 mHandler.sendMessage(Message.obtain(null, MSG_TEMPERATURE, characteristic));
-            if (HEART_RATE_DATA_CHAR.equals(characteristic.getUuid()))
+            if (HEART_RATE_MEASUREMENT.equals(characteristic.getUuid()))
                 mHandler.sendMessage(Message.obtain(null, MSG_HEART_RATE, characteristic));
 
             // After reading value enable notifications
@@ -316,9 +317,9 @@ public class MonitorActivity extends AppCompatActivity {
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             // After notifications are enabled all updates on changes will appear here
             // Hand these over to the UI
-            if(TEMPERATURE_DATA_CHAR.equals(characteristic.getUuid()))
+            if(TEMPERATURE.equals(characteristic.getUuid()))
                 mHandler.sendMessage(Message.obtain(null, MSG_TEMPERATURE, characteristic));
-            if(HEART_RATE_DATA_CHAR.equals(characteristic.getUuid()))
+            if(HEART_RATE_MEASUREMENT.equals(characteristic.getUuid()))
                 mHandler.sendMessage(Message.obtain(null, MSG_HEART_RATE, characteristic));
         }
 
