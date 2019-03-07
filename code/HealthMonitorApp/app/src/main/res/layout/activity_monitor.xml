@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="beforeDescendants"
     android:background="@drawable/background"
+    android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
@@ -16,6 +16,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Monitor" />
+
+    <TextView
+        android:id="@+id/HRM"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="HRM"
+        android:textSize="36sp"
+        android:typeface="monospace" />
 
     <Button
         android:id="@+id/StartScanButton"
@@ -54,15 +68,19 @@
         android:layout_alignParentBottom="true"
         android:text="Disconnect from device" />
 
+
     <EditText
         android:id="@+id/InputIndex"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
         android:cursorVisible="false"
         android:inputType="number"
         android:paddingLeft="10dp"
         android:singleLine="true" />
+
 
 </RelativeLayout>
