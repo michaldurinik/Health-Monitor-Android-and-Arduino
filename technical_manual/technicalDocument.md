@@ -75,6 +75,7 @@ sewn into the chosen garment.
 ![Micro-computer, Sensor, Bluetooth and Battery pack](img/adafruit_products.jpg "Micro-computer, Sensor, Bluetooth and Battery pack")
 </p>
 An Adroid phone application with a low energy bluetooth connection to receive data from the Bluefruit LE and display the information on the phones' screen.
+
 <p align="center">
 ![AdaFruit's Bluetooth](img/adafruit_bluetooth.jpg "AdaFruit's Bluetooth")
 </p>
