@@ -56,17 +56,17 @@ There are different ways to install an android app on your phone:
 
 |Connect battery pack to Jacket||
 |---|---|
-|![Connect the battery pack to Jacket](img/adafruit_products_battery_conn "Connecting the batteries")|Connect the battery pack cable to the Flora microcomputer as indicated by the red circle|
+|![Connect the battery pack to Jacket](img/adafruit_products_battery_conn.png "Connecting the batteries")|Connect the battery pack cable to the Flora microcomputer as indicated by the red circle|
 
 |Turning the jacket on||
 |---|---|
-|![Turning the Hardware/softwear on](img/adafruit_products_on_switch "Turning the Softwear on")|Please make sure that both the battery pack and the Flora micro computer are switch into the On position.<br>Switches can be found as indicated by the red circles.|
+|![Turning the Hardware/softwear on](img/adafruit_products_on_switch.png "Turning the Softwear on")|Please make sure that both the battery pack and the Flora micro computer are switch into the On position.<br>Switches can be found as indicated by the red circles.|
 
 # **Software description**
 
 |Permissions||
 |---|---|
-|![Permissions Set Up](img/permissions_screen "Permissions Set Up")| In order to gain the best possible experience with the Health and Wellbeing Monitor Application and Hardware, it is necessary to grant the phone application certain permissions<br> Permissions Needed:<br>- Bluetooth Connection|
+|![Permissions Set Up](img/permissions_screen.png "Permissions Set Up")| In order to gain the best possible experience with the Health and Wellbeing Monitor Application and Hardware, it is necessary to grant the phone application certain permissions<br> Permissions Needed:<br>- Bluetooth Connection|
 
 |Welcome Screen||
 |---|---|
@@ -78,29 +78,29 @@ There are different ways to install an android app on your phone:
 
 |Height, Weight, BMI||
 |---|---|
-|![Height, Weight, BMI choice](img/bmi_screen_1 "Height, Weight Entry screen")|Choosing Height, Weight or Body Mass Index will all take you to another screen. Displayed on this screen are two text entry screens were you should type in your details and press submit.|
+|![Height, Weight, BMI choice](img/bmi_screen_1.png "Height, Weight Entry screen")|Choosing Height, Weight or Body Mass Index will all take you to another screen. Displayed on this screen are two text entry screens were you should type in your details and press submit.|
 
 |Height, Weight, BMI||
 |---|---|
-|![Height, Weight, BMI choice](img/bmi_screen_2 "Height, Weight Entry screen")|After pressing the submit button your Body Mass Index ratio will appear on screen|
+|![Height, Weight, BMI choice](img/bmi_screen_2.png "Height, Weight Entry screen")|After pressing the submit button your Body Mass Index ratio will appear on screen|
 
 |Sensor Monitor Screen||
 |---|---|
-|![Monitor Screen Welcome](img/monitor_screen_1 "Welcome to monitor screen")|Back at the Main Welcome screen this is what you would receive if the Monitor Progress option is selected.<br> A screen with two buttons:<br>- The first starts a scan<br>- The second is for connecting to your Health and Wellbeing Jacket once discovered by the scan.|
+|![Monitor Screen Welcome](img/monitor_screen_1.png "Welcome to monitor screen")|Back at the Main Welcome screen this is what you would receive if the Monitor Progress option is selected.<br> A screen with two buttons:<br>- The first starts a scan<br>- The second is for connecting to your Health and Wellbeing Jacket once discovered by the scan.|
 
 |Sensor Monitor Screen||
 |---|---|
-|![Bluetooth Discovery](img/monitor_screen_2 "Bluetooth Discovery")|Once scan button is clicked the Health and Wellbeing Monitor will scan for available Low Energy connections and display this list to the the screen.<br> Take note of the idx number for the Health Monitor.|
+|![Bluetooth Discovery](img/monitor_screen_2.png "Bluetooth Discovery")|Once scan button is clicked the Health and Wellbeing Monitor will scan for available Low Energy connections and display this list to the the screen.<br> Take note of the idx number for the Health Monitor.|
 
 |Sensor Monitor Screen||
 |---|---|
-|![Enter index number](img/monitor_screen_3 "Entering index number for Health Monitor")| Take that noted indexnumber and enter it into the text field and press the connect button|
+|![Enter index number](img/monitor_screen_3.png "Entering index number for Health Monitor")| Take that noted indexnumber and enter it into the text field and press the connect button|
 
 |Sensor Monitor Screen||
 |---|---|
-|![Connection](img/monitor_screen_4 "Connected")|Once the connection between phone and Jacket is succesful a C or Con will be displayed on the top right of the screen|
+|![Connection](img/monitor_screen_4.png "Connected")|Once the connection between phone and Jacket is succesful a C or Con will be displayed on the top right of the screen|
 
 |Sensor Monitor Screen||
 |---|---|
-|![Beats Per Minute](img/monitor_screen_5 "Beats Per Minute")|Viola displayed for your perusal your heart rate|
+|![Beats Per Minute](img/monitor_screen_5.png "Beats Per Minute")|Viola displayed for your perusal your heart rate|
 
