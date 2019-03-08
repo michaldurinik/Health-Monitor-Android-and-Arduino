@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,10 +43,17 @@ import java.util.UUID;
 
 public class MonitorActivity extends AppCompatActivity {
 
+    private static final String TAG = "TAG";
+
     private static final UUID CLIENT_CHARACTERISTIC_CONFIG_UUID = convertFromInteger(0x2902);
     private static final UUID HEART_RATE_SERVICE_UUID = convertFromInteger(0x180D);
     private static final UUID HEART_RATE_MEASUREMENT_CHAR_UUID = convertFromInteger(0x2A37);
     private static final UUID HEART_RATE_CONTROL_POINT_CHAR_UUID = convertFromInteger(0x2A39);
+
+    //private static final UUID TEMPERATURE_SERVICE_UUID = convertFromInteger(0x1809);
+    //private static final UUID TEMPERATURE_MEASUREMENT_CHAR_UUID = convertFromInteger(0x2A1C);
+
+    //private static final String HEART_RATE_FULL_UUID = "00002a37-0000-1000-8000-00805f9b34fb";
 
     BluetoothManager bleManager;
     BluetoothAdapter bleAdapter;
@@ -62,7 +72,7 @@ public class MonitorActivity extends AppCompatActivity {
 
     Boolean bleScanning = false;
     int deviceIndex = 0;
-    String data = "";
+    String data = "XX";
     ArrayList<BluetoothDevice> devicesDiscovered = new ArrayList<BluetoothDevice>();
     EditText deviceIndexInput;
     Button connectToDevice;
@@ -183,21 +193,44 @@ public class MonitorActivity extends AppCompatActivity {
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
+
+            //Log.d("TAG",characteristic.getUuid().toString());
+            //boolean isHeartRate = characteristic.getUuid().toString().equals(HEART_RATE_FULL_UUID);
+            //if (isHeartRate) {
+
             //HRM.setText("GATT");
             // this will get called anytime you perform a read or write characteristic operation
-            data = new String(characteristic.getValue());
-            HRM.setText(data);
+            //data = new String(characteristic.getValue(),StandardCharsets.UTF_8);
+
+            ByteBuffer wrapped = ByteBuffer.wrap(characteristic.getValue()); // big-endian by default
+            final short num = wrapped.getShort();   //our payload data is in 2 bytes, ie short Type and not integer(4bytes)
+
             MonitorActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    peripheralTextView.append("123456789" + data);
+                    HRM.setText("" + num + " BPM");
+                    peripheralTextView.append("BPM " + num + "\n");
                 }
+
             });
+
+            //}
+//            else {
+//                ByteBuffer wrapped = ByteBuffer.wrap(characteristic.getValue()); // big-endian by default
+//                final short num = wrapped.getShort();   //our payload data is in 2 bytes, ie short Type and not integer(4bytes)
+//
+//                MonitorActivity.this.runOnUiThread(new Runnable() {
+//                    public void run() {
+//                        //HRM.setText("" + num);
+//                        peripheralTextView.append("TEMPS " + num + "\n");
+//                    }
+//            });
+//        }
         }
 
         @Override
         public void onConnectionStateChange(final BluetoothGatt gatt, final int status, final int newState) {
             // this will get called when a device connects or disconnects
-            System.out.println(newState);
+            Log.d(TAG, ""+newState);
             switch (newState) {
                 case 0:
                     MonitorActivity.this.runOnUiThread(new Runnable() {
@@ -234,23 +267,26 @@ public class MonitorActivity extends AppCompatActivity {
         @Override
         public void onServicesDiscovered(final BluetoothGatt gatt, final int status) {
             // this will get called after the client initiates a 			BluetoothGatt.discoverServices() call
-            MonitorActivity.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    peripheralTextView.append("device services have been discovered\n");
-                }
-            });
+//            MonitorActivity.this.runOnUiThread(new Runnable() {
+//                public void run() {
+//                    peripheralTextView.append("device services have been discovered\n");
+//                }
+//            });
+
             displayGattServices(bluetoothGatt.getServices());
-//            BluetoothGattCharacteristic characteristic =
-//                    gatt.getService(HEART_RATE_SERVICE_UUID)
-//                            .getCharacteristic(HEART_RATE_MEASUREMENT_CHAR_UUID);
-//            //gatt.setCharacteristicNotification(characteristic, enabled); //doesnt work
-//
-//            BluetoothGattDescriptor descriptor =
-//                    characteristic.getDescriptor(CLIENT_CHARACTERISTIC_CONFIG_UUID);
-//
-//            descriptor.setValue(
-//                    BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-//            gatt.writeDescriptor(descriptor);
+            BluetoothGattCharacteristic characteristic =
+                    gatt.getService(HEART_RATE_SERVICE_UUID)
+                            .getCharacteristic(HEART_RATE_MEASUREMENT_CHAR_UUID);
+            //gatt.setCharacteristicNotification(characteristic, enabled); //doesnt work
+
+
+            BluetoothGattDescriptor descriptor =
+                    characteristic.getDescriptor(CLIENT_CHARACTERISTIC_CONFIG_UUID);
+
+            descriptor.setValue(
+                    BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            gatt.writeDescriptor(descriptor);
+            //HRM.setText("onSDisc");
        }
 
         @Override
@@ -258,6 +294,7 @@ public class MonitorActivity extends AppCompatActivity {
         public void onCharacteristicRead(BluetoothGatt gatt,
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
+            HRM.setText("onRead");
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
@@ -265,18 +302,23 @@ public class MonitorActivity extends AppCompatActivity {
 
         @Override
         public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status){
-            BluetoothGattCharacteristic characteristic =
-                    gatt.getService(HEART_RATE_SERVICE_UUID)
-                            .getCharacteristic(HEART_RATE_CONTROL_POINT_CHAR_UUID);
+
+            BluetoothGattCharacteristic characteristic = gatt.getService(HEART_RATE_SERVICE_UUID).getCharacteristic(HEART_RATE_MEASUREMENT_CHAR_UUID);
+            //BluetoothGattCharacteristic temperatureCharacteristic = gatt.getService(TEMPERATURE_SERVICE_UUID).getCharacteristic(TEMPERATURE_MEASUREMENT_CHAR_UUID);
+
             characteristic.setValue(new byte[]{1, 1});
             gatt.writeCharacteristic(characteristic);
+            //gatt.writeCharacteristic(temperatureCharacteristic);
+
+            boolean hrm = gatt.setCharacteristicNotification(characteristic, true);
+            //boolean tmp = gatt.setCharacteristicNotification(temperatureCharacteristic, true);
         }
     };
 
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
 
-        System.out.println(characteristic.getUuid());
+        Log.d("TAG",characteristic.getUuid().toString());
         peripheralTextView.append("BBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
     }
 
@@ -285,7 +327,7 @@ public class MonitorActivity extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSION_REQUEST_COARSE_LOCATION: {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    System.out.println("coarse location permission granted");
+                    Log.d(TAG, "coarse location permission granted");
                 } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Functionality limited");
@@ -305,7 +347,7 @@ public class MonitorActivity extends AppCompatActivity {
     }
 
     public void startScanning() {
-        System.out.println("start scanning");
+        Log.d(TAG, "start scanning");
         bleScanning = true;
         HRM.setText("81");
         deviceIndex = 0;
@@ -330,7 +372,7 @@ public class MonitorActivity extends AppCompatActivity {
     }
 
     public void stopScanning() {
-        System.out.println("stopping scanning");
+        Log.d(TAG, "stopping scanning");
         peripheralTextView.append("Stopped Scanning\n");
         bleScanning = false;
         startScanningButton.setVisibility(View.VISIBLE);
@@ -345,9 +387,12 @@ public class MonitorActivity extends AppCompatActivity {
 
     public void connectToDeviceSelected() {
         HRM.setText("C");
+        Log.d(TAG,"C");
         peripheralTextView.append("Trying to connect to device at index: " + deviceIndexInput.getText() + "\n");
         int deviceSelected = Integer.parseInt(deviceIndexInput.getText().toString());
         bluetoothGatt = devicesDiscovered.get(deviceSelected).connectGatt(this, false, bleGattCallback);
+
+
     }
 
     public void disconnectDeviceSelected() {
@@ -362,7 +407,7 @@ public class MonitorActivity extends AppCompatActivity {
         for (BluetoothGattService gattService : gattServices) {
 
             final String uuid = gattService.getUuid().toString();
-            System.out.println("Service discovered: " + uuid);
+            Log.d(TAG,"Service discovered: " + uuid);
             MonitorActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
                     peripheralTextView.append("Service discovered: "+uuid+"\n");
@@ -377,7 +422,7 @@ public class MonitorActivity extends AppCompatActivity {
                     gattCharacteristics) {
 
                 final String charUuid = gattCharacteristic.getUuid().toString();
-                System.out.println("Characteristic discovered for service: " + charUuid);
+                Log.d(TAG, "Characteristic discovered for service: " + charUuid);
                 MonitorActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
                         peripheralTextView.append("Characteristic discovered for service: "+charUuid+"\n");
