@@ -1,8 +1,9 @@
+<p align="center">
 # Technical Document
 # Health and Wellbeing Monitor
 ### Michal Dudinik
 ### James Toolen
-
+</p>
 ### Table of contents
 
 ## 1. Introduction
@@ -70,13 +71,13 @@ The User will wear a jacket or a jumper, with:
  - Battery holder with connector and switch
 
 sewn into the chosen garment.
-
+<p align="center">
 ![Micro-computer, Sensor, Bluetooth and Battery pack](img/adafruit_products.jpg "Micro-computer, Sensor, Bluetooth and Battery pack")
-
+</p>
 An Adroid phone application with a low energy bluetooth connection to receive data from the Bluefruit LE and display the information on the phones' screen.
-
+<p align="center">
 ![AdaFruit's Bluetooth](img/adafruit_bluetooth.jpg "AdaFruit's Bluetooth")
-
+</p>
 Phones used for the testing of the application were:
 
 - HTC one M8api 23 marshmallow
@@ -103,11 +104,11 @@ The monitor screen is then updated when the jackets sensors change.
 
 
 ## 3. High-Level Design
-
+<p align="center">
 ![Context Diagram](img/ts_context.png "Context diagram")
 ---
 ![Data flow diagram](img/data_flow_diagram.png "Data Flow Diagram")
-
+</p>
 
 ## 4. Problems and Resolution
 
