@@ -6,13 +6,13 @@
 
 ## 1. Introduction
 
-    Overview
+#### Overview
     
 The Health and Wellbeing Monitor portrays to its user information collected from sensors in a garment. The information is analysed by a tiny computer in the jacket and passed on an Android mobile telephone. Where upon the data will be asessed and displayed numerically for the user to observe.
 
-    Glossary
+#### Glossary
 
-**Microcontroler**
+**Microcontroller**
 Very small computer on single integrated circuit board
 
 **Flora**
@@ -101,7 +101,9 @@ This section describes the high-level overview of the system architecture showin
 
 ## 3. High-Level Design
 
-![](img/ts_context.png "Context diagram")
+![Context Diagram](img/ts_context.png "Context diagram")
+---
+![Data flow diagram](img/data_flow_diagram.png "Data Flow Diagram")
 
 ***
 This section should set out the high-level design of the system. It should include system models showing the relationship between system components and the systems and its environment. These might be object-models, DFD, etc. Unlike the design in the Functional Specification - this description must reflect the design of the system as it is demonstrated.
@@ -121,6 +123,53 @@ This section should include a description of any major problems encountered duri
 ***
 
 ## 5. Installation Guide
+
+The Health and Wellbeing application has been designed for Android release version Android 6.0 Marshmallow. It should work in some lower versions back to Android 4.3 JellyBean. In Android 4.3 and later, the Android Bluetooth stack provided the ability to implement Bluetooth Low Energy (BLE).
+
+To install the Health and Wellbeing Android phone APK
+There are different ways to install an android app on your phone:
+- [ ] The Easiest way is to download the application from the Android Market or from the website directly to the SD card mounted in your phone, then click on the APK file to install it.
+- [ ] The next way is to download the APK file to your computer, mount your phone's SD card in the computer (or connect the phone with SD inserted in it to the computer via a USB cable) and apply the APK file to the SD card, then insert the SD card in the phone and install the APK file from the SD card using an Application Installer or File Manager that you can download from the Android market.
+
+1. #### The Easy Way
+    This method requires:
+   * Internet service on Android phone
+   * A gmail.com account to access the Android market
+   * An SD card inserted into the phone
+- Open the Android Market application in the Applications menu. If you have never accessed the Android Mrket before you will be prompted for the login and password of your gmail.com account. Enter this information to create a market account.
+- Within the Android Market, you can select the appropriate option on the menu bar to locate the application you want to install.
+-- Applications displays a categorised list of all applications available on the market.
+-- Games shows a categorised list of all the available games.
+-- Download lists the APK files you have already downloaded
+- Use Search (magnifying glass) to quickly find The Health and Wellbeing application. You will get a list of matching applications along with each ones description and rating
+- Click on the application and more details are displayed
+- To install the Health and Wellbeing application, just click on the install button on the bottom of the screen.
+- In the next screen, you will see more details about the application including the different functionalities it needs to access.
+- Click OK to finish the installation process
+
+2. #### The Next Way
+      This method requires:
+   * Internet service to your Android phone
+   * A browser
+   * An SD card inserted in the phone
+- Open the Applications menu (tab in the bottom centre of the phone's home screen)
+- Click on the Settings application
+- Check the first selection, Unknown Sources is checked so you are able to install an APK file from a location other than the Android Market.
+- A warning message will be displayed, select OK to continue. You can change this setting back once the Heath and Wellbeing app is installed.
+- Open the phones browser and navigate to http://student.computing.dcu.ie Where the Health and Wellbeing app as been made available for download
+- Click the download link and download the application directly to your SD card, you should see a message that says "Starting download"
+- In the upper left-hand corner of the screen, an animated download pointing arrow will display. When the animation stops, the download has completed.
+- Click the arrow and you should see the newly dowloaded HealthandWellbeing.apk file name listed in the Notifications section. (If the arrow doesnt open the Notifications list, return to the home screen and pull down the Status bar at the top of the screen to see the list)
+- Click on HealthandWellbeing file. A new screen will appear giving you more details ablut the application including the different functionalities it will need permission to access
+- To install the Health and Wellbeing application just click on the install button at the bottom of the screen
+- Once the installation is complete a new screen is displayed where you can choose to run the application immediately
+
+### To Install the Jacket:
+- Place left arm into left sleeve
+- And again with the right arm into the right sleeve
+- Fix as comfortable around the shoulders
+- Tighten as required the left wristband
+- Flick battery pack switch to On.
 
 ***
 This is a 1 to 2 page section which contains a step by step software installation guide. It should include a detailed description of the steps necessary to install the software, a list of all required software, components, versions, hardware, etc.
