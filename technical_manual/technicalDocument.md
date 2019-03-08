@@ -1,6 +1,7 @@
 # Technical Document
-
- 
+# Health and Wellbeing Monitor
+### Michal Dudinik
+### James Toolen
 
 ### Table of contents
 
@@ -93,9 +94,7 @@ From the entries into the height and weight categories the body mass index is ca
 The Sensor monitor screen is were the magic happens, once selected and the screen is displayed a background service starts and connects to the jackets bluetooth advertisement.
 The monitor screen is then updated when the jackets sensors change.
 
-***
-This section describes the high-level overview of the system architecture showing the distribution functions across (potential) system modules. Architectural components that are reused or 3rd party should be highlighted. Unlike the architecture in the Functional Specification - this description must reflect the design components of the system as it is demonstrated.
-***
+
 
 
 
@@ -105,9 +104,7 @@ This section describes the high-level overview of the system architecture showin
 ---
 ![Data flow diagram](img/data_flow_diagram.png "Data Flow Diagram")
 
-***
-This section should set out the high-level design of the system. It should include system models showing the relationship between system components and the systems and its environment. These might be object-models, DFD, etc. Unlike the design in the Functional Specification - this description must reflect the design of the system as it is demonstrated.
-***
+
 ## 4. Problems and Resolution
 
 Understanding and coming to terms with Androids architecture proved to be challenging at first.
@@ -118,9 +115,6 @@ Busy schedules, poor project management, budget constraints all had a part in a 
 Schedules and responsibilities resticted any prolonged gathering and collaboration and therefore nothing less than copious amounts of coffee was needed at times when nana wouldnt allow during the final sprint. Unfortunatly this also played a part into not keeping in touch with our supervisor as regular as we would have liked and we tried to make up for it by badgering him a little late on.
 
 
-***
-This section should include a description of any major problems encountered during the design and implementation of the system and the actions that were taken to resolve them.
-***
 
 ## 5. Installation Guide
 
@@ -170,7 +164,3 @@ There are different ways to install an android app on your phone:
 - Fix as comfortable around the shoulders
 - Tighten as required the left wristband
 - Flick battery pack switch to On.
-
-***
-This is a 1 to 2 page section which contains a step by step software installation guide. It should include a detailed description of the steps necessary to install the software, a list of all required software, components, versions, hardware, etc.
-***
