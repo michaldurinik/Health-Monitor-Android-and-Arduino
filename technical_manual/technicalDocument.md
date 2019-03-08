@@ -71,11 +71,11 @@ The User will wear a jacket or a jumper, with:
 
 sewn into the chosen garment.
 
-![Micro-computer, Sensor, Bluetooth and Battery pack](img/adafruit_products "Micro-computer, Sensor, Bluetooth and Battery pack")
+![Micro-computer, Sensor, Bluetooth and Battery pack](img/adafruit_products.png "Micro-computer, Sensor, Bluetooth and Battery pack")
 
 An Adroid phone application with a low energy bluetooth connection to receive data from the Bluefruit LE and display the information on the phones' screen.
 
-![AdaFruit's Bluetooth](img/adafruit_bluetooth "AdaFruit's Bluetooth")
+![AdaFruit's Bluetooth](img/adafruit_bluetooth.png "AdaFruit's Bluetooth")
 
 Phones used for the testing of the application were:
 
