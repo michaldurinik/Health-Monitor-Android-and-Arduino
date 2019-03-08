@@ -273,7 +273,7 @@ public class MonitorActivity extends AppCompatActivity {
 //                }
 //            });
 
-            displayGattServices(bluetoothGatt.getServices());
+            //displayGattServices(bluetoothGatt.getServices());
             BluetoothGattCharacteristic characteristic =
                     gatt.getService(HEART_RATE_SERVICE_UUID)
                             .getCharacteristic(HEART_RATE_MEASUREMENT_CHAR_UUID);
@@ -349,7 +349,7 @@ public class MonitorActivity extends AppCompatActivity {
     public void startScanning() {
         Log.d(TAG, "start scanning");
         bleScanning = true;
-        HRM.setText("81");
+        HRM.setText("00");
         deviceIndex = 0;
         devicesDiscovered.clear();
         peripheralTextView.setText("");
@@ -386,8 +386,8 @@ public class MonitorActivity extends AppCompatActivity {
     }
 
     public void connectToDeviceSelected() {
-        HRM.setText("C");
-        Log.d(TAG,"C");
+        HRM.setText("Con");
+        Log.d(TAG,"Con");
         peripheralTextView.append("Trying to connect to device at index: " + deviceIndexInput.getText() + "\n");
         int deviceSelected = Integer.parseInt(deviceIndexInput.getText().toString());
         bluetoothGatt = devicesDiscovered.get(deviceSelected).connectGatt(this, false, bleGattCallback);
