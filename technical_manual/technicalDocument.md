@@ -101,7 +101,7 @@ This section describes the high-level overview of the system architecture showin
 
 ## 3. High-Level Design
 
-![]("img/ts_context.png")
+![](img/ts_context.png "Context diagram")
 
 ***
 This section should set out the high-level design of the system. It should include system models showing the relationship between system components and the systems and its environment. These might be object-models, DFD, etc. Unlike the design in the Functional Specification - this description must reflect the design of the system as it is demonstrated.
